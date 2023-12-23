@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y unzip wget &&\
  echo "CATALINA_HOME=/usr/local/tomcat" >> /etc/bashrc &&\
  echo "CLASSPATH=$JAVA_HOME/jre/lib:$JAVA_HOME/lib/tools.jar:$CATALINA_HOME/lib-jsp-api.jar:$CATALINA_HOME/lib/servlet-api.jar" >> /etc/bashrc &&\
  rm -rf /usr/local/tomcat/webapps/*
+RUN apt-get install vim -y
 ENV TZ=Asia/Seoul
 COPY stu.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8080
