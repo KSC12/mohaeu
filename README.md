@@ -1,2 +1,71 @@
 # mohaeu
 sk rookies 15기 프로젝트
+
+프로젝트 도커환경 구축 가이드
+docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb 파일 다운
+wget https://editions.docker.com/linux/ubuntu/dists/artful/pool/edge/amd64/docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb
+
+sudo rm varlibaptlistslock
+sudo rm varcacheaptarchiveslock
+sudo rm varlibdpkglock
+
+도커 설치
+sudo dpkg -i docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb
+
+
+버전 확인
+sudo docker --version
+
+
+깃헙 링크 다운
+git clone https://github.com/KSC12/mohaeu.git
+
+웹 도커 이미지 빌드
+cd mohaeu
+sudo docker build . -t web
+
+db 도커 이미지 빌드
+cd dbserver
+sudo docker build . -t db
+
+웹&db&cadvisor 서버 컨테이너 실행
+sudo docker run -itd -p 8080:8080 --name webserver web
+sudo docker run -itd -p 1521:1521 --name dbserver db
+sudo docker run --volume=/:/rootfs:ro --volume=/var/run:/var/run:ro --volume=/sys:/sys:ro --volume=/var/lib/docker/:/var/lib/docker:ro --volume=/dev/disk/:/dev/disk:ro --publish=9394:8080 --detach=true --name=cadvisor --privileged --device=/dev/kmsg gcr.io/cadvisor/cadvisor:latest
+
+웹서버 설정 바꾸기
+sudo docker exec -it webserver bash
+
+dp ip 및 계정정보 수정
+vim webapps/ROOT/WEB-INF/classes/config/spring/context-datasource.xml 
+
+cadvisor ip 수정
+vim webapps/ROOT/WEB-INF/views/admin/server.jsp
+
+
+db 스키마 작성
+sudo docker exec -it dbserver bash
+sqlplus system/gtcha6
+
+테이블&유저생성
+create tablespace shop datafile 'aaaa.dbf' size 100m reuse autoextend on next 100m maxsize unlimited;
+create user shop identified by shop1234 default tablespace shop;
+grant connect, resource to shop;
+
+sqlplus 나가기
+exit
+
+shop다시접속
+sqlplus shop/shop1234
+
+테이블 작성
+@@앞에경로/mohaeu/dbsql.sql
+
+끗.
+
+
+
+
+
+
+
