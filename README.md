@@ -1,15 +1,13 @@
 # mohaeu
 sk rookies 15기 프로젝트
 
-프로젝트 도커환경 구축 가이드
+프로젝트 도커환경 구축 가이드\
 docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb 파일 다운\
-wget https://editions.docker.com/linux/ubuntu/dists/artful/pool/edge/amd64/docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb
-\
+wget https://editions.docker.com/linux/ubuntu/dists/artful/pool/edge/amd64/docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb \
 
 sudo rm varlibaptlistslock \
 sudo rm varcacheaptarchiveslock \
 sudo rm varlibdpkglock \
-
 도커 설치\
 sudo dpkg -i docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb
 \
