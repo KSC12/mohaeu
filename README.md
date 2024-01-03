@@ -50,7 +50,7 @@ vim webapps/ROOT/WEB-INF/views/admin/server.jsp
 db 스키마 작성\
 sudo docker exec -it dbserver bash
 \
-sqlplus system/gtcha6
+sqlplus system/gtcha6@컨테이너ip:port/xe
 \
 테이블&유저생성\
 create tablespace shop datafile 'aaaa.dbf' size 100m reuse autoextend on next 100m maxsize unlimited;
@@ -63,7 +63,7 @@ sqlplus 나가기\
 exit
 \
 shop 계정으로 다시접속\
-sqlplus shop/shop1234
+sqlplus shop/shop1234@컨테이너ip:port/xe
 \
 테이블 작성\
 @@앞에경로/mohaeu/dbsql.sql
